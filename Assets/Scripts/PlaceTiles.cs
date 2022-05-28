@@ -28,6 +28,9 @@ public class PlaceTiles : MonoBehaviour
         tiles.Add("0101", tileSprites[5]);
         tiles.Add("0000", tileSprites[6]);
         tiles.Add("1111", tileSprites[7]);
+        tiles.Add("0010", tileSprites[8]);
+        tiles.Add("0011", tileSprites[9]);
+        tiles.Add("0110", tileSprites[10]);
 
         float[,] noiseMap = new float[size, size];
         (float xOffset, float yOffset) = (Random.Range(-10000f, 10000f), Random.Range(-10000f, 10000f));
@@ -65,6 +68,7 @@ public class PlaceTiles : MonoBehaviour
             }
         }
         drawTiles();
+        cornerPass();
     }
     public void drawTiles()
     {
@@ -83,12 +87,19 @@ public class PlaceTiles : MonoBehaviour
                     try
                     {
                         currentTile = tiles[checkNextToWater(x, y)];
+                        if(currentTile.name[currentTile.name.Length - 1].ToString() == "1")
+                        {
+                            grid[x, y].isBottomCorner = true;
+                        }
+                        if(checkNextToWater(x,y)[2].ToString() == "1")
+                        {
+                            grid[x, y].isBottomEdge = true;
+                        }
                     }
                     catch
                     {
                         currentTile = tiles["1111"];
                     }
-                    //Debug.Log(tiles["963804386045"]);
 
                 }
                 
@@ -99,6 +110,28 @@ public class PlaceTiles : MonoBehaviour
         }
         
     }
+
+    public void cornerPass()
+    {
+        for (int y = 0; y < size; y++)
+        {
+            for (int x = 0; x < size; x++)
+            {
+                if (grid[x, y].isBottomCorner == false) { continue; }
+                if (grid[x - 1, y].isWater == true)
+                {
+                    if(grid[x-1, y+1].isWater == true) { continue; }
+                    map.SetTile(new Vector3Int(x, y + 1, 1), tileSprites[12]);
+                }
+                if (grid[x + 1, y].isWater == true)
+                {
+                    if (grid[x + 1, y + 1].isWater == true) { continue; }
+                    map.SetTile(new Vector3Int(x, y + 1, 1), tileSprites[11]);
+                }
+
+            }
+        }
+    }
     public string checkNextToWater(int x, int y)
     {
         string edges = "";
@@ -106,11 +139,10 @@ public class PlaceTiles : MonoBehaviour
         int yMod = 0;
         for (int i = 0; i < 4; i++)
         {
-            if(i == 0) { xMod = 0; yMod = 1; Debug.Log("north"); }
-            else if (i == 1) { xMod = 1; yMod = 0; Debug.Log("west"); }
-            else if (i == 2) { xMod = 0; yMod = -1; Debug.Log("south"); }
-            else if (i == 3) { xMod = -1; yMod = 0; Debug.Log("east"); }
-            Debug.Log(grid[x + xMod, y + yMod].isWater);
+            if(i == 0) { xMod = 0; yMod = 1;  }
+            else if (i == 1) { xMod = 1; yMod = 0; }
+            else if (i == 2) { xMod = 0; yMod = -1; }
+            else if (i == 3) { xMod = -1; yMod = 0; }
             if(grid[x + xMod, y + yMod].isWater == true)
             {
                 edges += "1";
@@ -120,7 +152,6 @@ public class PlaceTiles : MonoBehaviour
                 edges += "0";
             }
         }
-        Debug.Log(edges);
         return edges;
     }
 }
