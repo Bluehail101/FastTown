@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 452017414}
   - component: {fileID: 452017413}
   m_Layer: 0
-  m_Name: Y1
+  m_Name: Level2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -194,7 +194,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -412,7 +412,7 @@ GameObject:
   - component: {fileID: 1016775857}
   - component: {fileID: 1016775856}
   m_Layer: 0
-  m_Name: Y2
+  m_Name: Level1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -471,7 +471,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -624,8 +624,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6af7a2911a310e9479fae36f1561c8e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  map: {fileID: 1279951353}
-  tileWater: {fileID: 11400000, guid: a962f4647511aee4cb885ce9f5711a1a, type: 2}
+  level0: {fileID: 1953432806}
+  level1: {fileID: 1016775857}
+  level2: {fileID: 0}
   tileGrass: {fileID: 11400000, guid: 9c80196a7acde974c92200a79fe7ffae, type: 2}
   tileEdge: {fileID: 11400000, guid: 9f6cd4230b7855245ae4978359f14ef1, type: 2}
   tileSprites:
@@ -650,8 +651,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: eb9eba493e94f9f46b59102bf567b93f, type: 2}
   - {fileID: 11400000, guid: bff68eedf7cbfb545a7ace7686c20167, type: 2}
   - {fileID: 11400000, guid: 36003243a543ffb4ab23bb3616955d8f, type: 2}
+  - {fileID: 11400000, guid: 438f13199a91198408fbb93e499d5838, type: 2}
+  - {fileID: 11400000, guid: 3f1f11db950ec6444a3764bd97ca9cc6, type: 2}
+  - {fileID: 11400000, guid: 62484189a7f69414abbe008e6d96746e, type: 2}
+  - {fileID: 11400000, guid: 1a106d4afffe1db47a64da4238a52403, type: 2}
   size: 60
   waterLevel: 0.3
+  level1Level: 0.6
   scale: 0.1
 --- !u!156049354 &1095736876
 Grid:
@@ -854,7 +860,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -889,7 +895,7 @@ GameObject:
   - component: {fileID: 1953432806}
   - component: {fileID: 1953432805}
   m_Layer: 0
-  m_Name: Y3
+  m_Name: Level0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
