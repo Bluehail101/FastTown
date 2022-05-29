@@ -626,9 +626,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level0: {fileID: 1953432806}
   level1: {fileID: 1016775857}
-  level2: {fileID: 0}
+  trees: {fileID: 1279951353}
   tileGrass: {fileID: 11400000, guid: 9c80196a7acde974c92200a79fe7ffae, type: 2}
   tileEdge: {fileID: 11400000, guid: 9f6cd4230b7855245ae4978359f14ef1, type: 2}
+  treeTile: {fileID: 11400000, guid: 1b4b0fefd2e43f1469aac752f7f5d6e5, type: 2}
   tileSprites:
   - {fileID: 11400000, guid: a9c977425c2ac01429cf400dde956748, type: 2}
   - {fileID: 11400000, guid: 0008836a9944c94438f0c316ab2a9760, type: 2}
@@ -658,6 +659,7 @@ MonoBehaviour:
   size: 60
   waterLevel: 0.3
   level1Level: 0.6
+  treeDensity: 0.45
   scale: 0.1
 --- !u!156049354 &1095736876
 Grid:
@@ -701,7 +703,7 @@ GameObject:
   - component: {fileID: 1279951353}
   - component: {fileID: 1279951354}
   m_Layer: 0
-  m_Name: Details
+  m_Name: Trees
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

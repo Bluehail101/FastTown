@@ -7,19 +7,22 @@ public class PlaceTiles : MonoBehaviour
 {
     public Tilemap level0;
     public Tilemap level1;
-    public Tilemap level2;
+    public Tilemap trees;
     public Tile tileGrass;
     public Tile tileEdge;
+    public Tile treeTile;
     public List<Tile> tileSprites;
     public Dictionary<string, Tile> tiles = new Dictionary<string, Tile>();
 
     public int size;
     public float waterLevel;
     public float level1Level;
+    public float treeDensity;
     public float scale;
 
     Cell[,] grid0;
     Cell[,] grid1;
+    Cell[,] treeGrid;
 
     public void Start()
     {
@@ -94,15 +97,18 @@ public class PlaceTiles : MonoBehaviour
         drawTiles(grid0, level0, true);
         cornerPass(grid0, level0);
         cleanUpPass(grid0, level0);
+
         tiles["0010"] = tileSprites[22];
         tiles["0011"] = tileSprites[21];
         tiles["0110"] = tileSprites[24];
         tiles["0111"] = tileSprites[23];
         tiles["0111"] = tileSprites[23];
         tiles["1111"] = tileSprites[6];
+
         drawTiles(grid1, level1, false);
         cornerPass(grid1, level1);
         cleanUpPass(grid1, level1);
+        treePass(trees, falloffMap);
     }
     public void drawTiles(Cell[,] grid, Tilemap currentMap, bool spawnWater)
     {
@@ -292,5 +298,42 @@ public class PlaceTiles : MonoBehaviour
             }
         }
         return edges;
+    }
+
+    public void treePass(Tilemap currentMap, float[,] falloff)
+    {
+        float[,] noiseMap = new float[size, size];
+        (float xOffset, float yOffset) = (Random.Range(-10000f, 10000f), Random.Range(-10000f, 10000f));
+        for (int y = 0; y < size; y++)
+        {
+            for (int x = 0; x < size; x++)
+            {
+                float noiseValue = Mathf.PerlinNoise(x * scale + xOffset, y * scale + yOffset);
+                noiseMap[x, y] = noiseValue;
+            }
+        }
+
+        treeGrid = new Cell[size, size];
+        for (int y = 0; y < size; y++)
+        {
+            for (int x = 0; x < size; x++)
+            {
+                Cell cell = new Cell();
+                float noiseValue = noiseMap[x, y];
+                noiseValue -= falloff[x, y];
+                cell.isWater = noiseValue < treeDensity;
+                treeGrid[x, y] = cell;
+            }
+        }
+        for (int y = 0; y < size; y++)
+        {
+            for (int x = 0; x < size; x++)
+            {
+                if(treeGrid[x,y].isWater == false)
+                {
+                    currentMap.SetTile(new Vector3Int(x, y, 1), treeTile);
+                }
+            }
+        }
     }
 }
