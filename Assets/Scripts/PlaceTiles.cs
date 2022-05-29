@@ -31,6 +31,11 @@ public class PlaceTiles : MonoBehaviour
         tiles.Add("0010", tileSprites[8]);
         tiles.Add("0011", tileSprites[9]);
         tiles.Add("0110", tileSprites[10]);
+        tiles.Add("1010", tileSprites[10]);
+        tiles.Add("1101", tileSprites[14]);
+        tiles.Add("1110", tileSprites[15]);
+        tiles.Add("1011", tileSprites[16]);
+        tiles.Add("0111", tileSprites[17]);
 
         float[,] noiseMap = new float[size, size];
         (float xOffset, float yOffset) = (Random.Range(-10000f, 10000f), Random.Range(-10000f, 10000f));
@@ -69,6 +74,7 @@ public class PlaceTiles : MonoBehaviour
         }
         drawTiles();
         cornerPass();
+        cleanUpPass();
     }
     public void drawTiles()
     {
@@ -86,23 +92,31 @@ public class PlaceTiles : MonoBehaviour
                    
                     try
                     {
-                        currentTile = tiles[checkNextToWater(x, y)];
+                        string tileString = checkNextToWater(x, y);
+                        currentTile = tiles[tileString];
                         if(currentTile.name[currentTile.name.Length - 1].ToString() == "1")
                         {
                             grid[x, y].isBottomCorner = true;
                         }
-                        if(checkNextToWater(x,y)[2].ToString() == "1")
+                        if(tileString[2].ToString() == "1")
                         {
                             grid[x, y].isBottomEdge = true;
+                        }
+                        if(tileString == "1011" || tileString == "1110")
+                        {
+                            grid[x, y].isEndPiece = true;
+                        }
+                        if (tileString == "0111")
+                        {
+                            grid[x, y].isBottomEndPiece = true;
                         }
                     }
                     catch
                     {
-                        currentTile = tiles["1111"];
+                        currentTile = tileWater;
                     }
 
                 }
-                
                 map.SetTile(new Vector3Int(x, y, 1), currentTile);
                
 
@@ -117,6 +131,7 @@ public class PlaceTiles : MonoBehaviour
         {
             for (int x = 0; x < size; x++)
             {
+                if(grid[x, y].isEndPiece == true) { continue; }
                 if(grid[x, y].isBottomCorner == false && grid[x, y].isBottomEdge == true)
                 {
                     if (grid[x - 1, y].isWater == false)
@@ -149,6 +164,61 @@ public class PlaceTiles : MonoBehaviour
                     if (grid[x + 1, y - 1].isWater == false) { map.SetTile(new Vector3Int(x + 1, y, 1), tileSprites[12]); }
                 }
 
+            }
+        }
+    }
+
+    public void cleanUpPass()
+    {
+        for (int y = 0; y < size; y++)
+        {
+            for (int x = 0; x < size; x++)
+            {
+                if(grid[x, y].isBottomEndPiece == true)
+                {
+                    if (grid[x - 1, y + 1].isWater == false && grid[x + 1, y + 1].isWater == false)
+                    {
+                        map.SetTile(new Vector3Int(x, y + 1, 1), tileSprites[18]);
+                        continue;
+                    }
+                    if (grid[x - 1, y + 1].isWater == true && grid[x + 1, y + 1].isWater == false)
+                    {
+                        map.SetTile(new Vector3Int(x, y + 1, 1), tileSprites[19]);
+                        continue;
+                    }
+                    if (grid[x - 1, y + 1].isWater == false && grid[x + 1, y + 1].isWater == true)
+                    {
+                        map.SetTile(new Vector3Int(x, y + 1, 1), tileSprites[20]);
+                        continue;
+                    }
+                }
+                if(grid[x,y].isEndPiece == false) { continue; }
+                if(grid[x - 1,y].isWater == true)
+                {
+                    map.SetTile(new Vector3Int(x, y, 1), tileWater);
+                    grid[x, y].isWater = true;
+                    if(grid[x + 1, y + 1].isWater == true)
+                    {
+                        map.SetTile(new Vector3Int(x + 1, y, 1), tileSprites[0]);
+                    }
+                    else
+                    {
+                        map.SetTile(new Vector3Int(x + 1, y, 1), tileSprites[3]);
+                    }
+                }
+                else
+                {
+                    map.SetTile(new Vector3Int(x, y, 1), tileWater);
+                    grid[x, y].isWater = true;
+                    if (grid[x - 1, y + 1].isWater == true)
+                    {
+                        map.SetTile(new Vector3Int(x - 1, y, 1), tileSprites[2]);
+                    }
+                    else
+                    {
+                        map.SetTile(new Vector3Int(x - 1, y, 1), tileSprites[4]);
+                    }
+                }
             }
         }
     }
