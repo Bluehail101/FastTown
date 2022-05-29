@@ -117,16 +117,36 @@ public class PlaceTiles : MonoBehaviour
         {
             for (int x = 0; x < size; x++)
             {
+                if(grid[x, y].isBottomCorner == false && grid[x, y].isBottomEdge == true)
+                {
+                    if (grid[x - 1, y].isWater == false)
+                    {
+                        if (grid[x - 1, y - 1].isWater == false) { map.SetTile(new Vector3Int(x - 1, y, 1), tileSprites[11]); }
+                    }
+                    if (grid[x + 1, y].isWater == false)
+                    {
+                        if (grid[x + 1, y - 1].isWater == false) { map.SetTile(new Vector3Int(x + 1, y, 1), tileSprites[12]); }
+                    }
+                }
+
+
                 if (grid[x, y].isBottomCorner == false) { continue; }
+
                 if (grid[x - 1, y].isWater == true)
                 {
-                    if(grid[x-1, y+1].isWater == true) { continue; }
-                    map.SetTile(new Vector3Int(x, y + 1, 1), tileSprites[12]);
+                    if(grid[x - 1, y + 1].isWater == false) { map.SetTile(new Vector3Int(x, y + 1, 1), tileSprites[12]); }                  
+                }
+                else
+                {
+                    if (grid[x - 1, y - 1].isWater == false) { map.SetTile(new Vector3Int(x - 1, y, 1), tileSprites[11]); }
                 }
                 if (grid[x + 1, y].isWater == true)
                 {
-                    if (grid[x + 1, y + 1].isWater == true) { continue; }
-                    map.SetTile(new Vector3Int(x, y + 1, 1), tileSprites[11]);
+                    if (grid[x + 1, y + 1].isWater == false) { map.SetTile(new Vector3Int(x, y + 1, 1), tileSprites[11]); }
+                }
+                else
+                {
+                    if (grid[x + 1, y - 1].isWater == false) { map.SetTile(new Vector3Int(x + 1, y, 1), tileSprites[12]); }
                 }
 
             }
