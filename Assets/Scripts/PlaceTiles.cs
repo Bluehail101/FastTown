@@ -12,6 +12,7 @@ public class PlaceTiles : MonoBehaviour
     public Tile tileEdge;
     public Tile treeTile;
     public List<Tile> tileSprites;
+    public List<Tile> forestTiles;
     public Dictionary<string, Tile> tiles = new Dictionary<string, Tile>();
 
     public int size;
@@ -22,7 +23,7 @@ public class PlaceTiles : MonoBehaviour
 
     Cell[,] grid0;
     Cell[,] grid1;
-    Cell[,] treeGrid;
+    DetailCell[,] treeGrid;
 
     public void Start()
     {
@@ -102,12 +103,12 @@ public class PlaceTiles : MonoBehaviour
         tiles["0011"] = tileSprites[21];
         tiles["0110"] = tileSprites[24];
         tiles["0111"] = tileSprites[23];
-        tiles["0111"] = tileSprites[23];
         tiles["1111"] = tileSprites[6];
 
         drawTiles(grid1, level1, false);
         cornerPass(grid1, level1);
         cleanUpPass(grid1, level1);
+        cleanUpPass2(grid1, level1);
         treePass(trees, falloffMap);
     }
     public void drawTiles(Cell[,] grid, Tilemap currentMap, bool spawnWater)
@@ -277,6 +278,22 @@ public class PlaceTiles : MonoBehaviour
             }
         }
     }
+    public void cleanUpPass2(Cell[,] grid, Tilemap currentMap)
+    {
+        for (int y = 0; y < size; y++)
+        {
+            for (int x = 0; x < size; x++)
+            {
+                if(currentMap.GetTile(new Vector3Int (x,y,1)) == tileSprites[6])
+                {
+                    if(checkNextToWater(grid1, x, y) == "1111")
+                    {
+                        currentMap.SetTile(new Vector3Int(x,y,1), null);
+                    }
+                }
+            }
+        }
+    }
     public string checkNextToWater(Cell[,] grid, int x, int y)
     {
         string edges = "";
@@ -313,15 +330,27 @@ public class PlaceTiles : MonoBehaviour
             }
         }
 
-        treeGrid = new Cell[size, size];
+        treeGrid = new DetailCell[size, size];
         for (int y = 0; y < size; y++)
         {
             for (int x = 0; x < size; x++)
             {
-                Cell cell = new Cell();
+                DetailCell cell = new DetailCell();
                 float noiseValue = noiseMap[x, y];
                 noiseValue -= falloff[x, y];
-                cell.isWater = noiseValue < treeDensity;
+                cell.isTree = noiseValue < treeDensity;
+                if(grid0[x,y].isWater == true || grid0[x,y].isBottomEdge == true || grid1[x,y].isBottomEdge == true)
+                {
+                    cell.isTree = false;
+                }
+                if(grid1[x,y].isWater == false)
+                {
+                    cell.level = 1;
+                }
+                else
+                {
+                    cell.level = 0;
+                }
                 treeGrid[x, y] = cell;
             }
         }
@@ -329,9 +358,32 @@ public class PlaceTiles : MonoBehaviour
         {
             for (int x = 0; x < size; x++)
             {
-                if(treeGrid[x,y].isWater == false)
+                if(treeGrid[x,y].isTree == false) { continue; }
+                if(treeGrid[x,y].level == 1) { continue; }
+                if (treeGrid[x, y + 1].isTree == false || treeGrid[x, y - 1].isTree == false)
                 {
-                    currentMap.SetTile(new Vector3Int(x, y, 1), treeTile);
+                    //currentMap.SetTile(new Vector3Int(x, y, 1), null);
+                    //treeGrid[x, y].isTree = false;
+                    //continue;
+                }
+                if (treeGrid[x,y-1].isTree == false || treeGrid[x, y - 1].level == 1)
+                {
+                    currentMap.SetTile(new Vector3Int(x, y, 1), forestTiles[0]);
+                    continue;
+                }
+                if(treeGrid[x,y+1].isTree == false || treeGrid[x, y + 1].level == 1)
+                {
+                    currentMap.SetTile(new Vector3Int(x, y, 1), forestTiles[1]);
+                    continue;
+                }
+                int rnd = Random.Range(1, 4);
+                if(rnd == 1)
+                {
+                    currentMap.SetTile(new Vector3Int(x, y, 1), forestTiles[2]);
+                }
+                else
+                {
+                    currentMap.SetTile(new Vector3Int(x, y, 1), forestTiles[3]);
                 }
             }
         }
