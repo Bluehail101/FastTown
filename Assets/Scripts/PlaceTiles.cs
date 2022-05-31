@@ -468,6 +468,7 @@ public class PlaceTiles : MonoBehaviour
                 else if (rnd == 2 && treeGrid[x,y].isTree == false)
                 {
                     currentMap.SetTile(new Vector3Int(x, y, 1), rockTiles[Random.Range(0, rockTiles.Count)]);
+                    detailGrid[x, y].isRock = true;
                 }
                 else
                 {
