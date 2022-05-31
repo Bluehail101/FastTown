@@ -19,6 +19,7 @@ public class PlaceTiles : MonoBehaviour
     public float waterLevel;
     public float level1Level;
     public float treeDensity;
+    public float treeScale;
     public float scale;
 
     Cell[,] grid0;
@@ -289,6 +290,7 @@ public class PlaceTiles : MonoBehaviour
                     if(checkNextToWater(grid1, x, y) == "1111")
                     {
                         currentMap.SetTile(new Vector3Int(x,y,1), null);
+                        grid1[x, y].isWater = true;
                     }
                 }
             }
@@ -325,7 +327,7 @@ public class PlaceTiles : MonoBehaviour
         {
             for (int x = 0; x < size; x++)
             {
-                float noiseValue = Mathf.PerlinNoise(x * scale + xOffset, y * scale + yOffset);
+                float noiseValue = Mathf.PerlinNoise(x * treeScale + xOffset, y * treeScale + yOffset);
                 noiseMap[x, y] = noiseValue;
             }
         }
@@ -338,6 +340,7 @@ public class PlaceTiles : MonoBehaviour
                 DetailCell cell = new DetailCell();
                 float noiseValue = noiseMap[x, y];
                 noiseValue -= falloff[x, y];
+                
                 cell.isTree = noiseValue < treeDensity;
                 if(grid0[x,y].isWater == true || grid0[x,y].isBottomEdge == true || grid1[x,y].isBottomEdge == true)
                 {
@@ -354,30 +357,36 @@ public class PlaceTiles : MonoBehaviour
                 treeGrid[x, y] = cell;
             }
         }
+        placeTrees(0, currentMap);
+        placeTrees(1, currentMap);
+        
+    }
+    public void placeTrees(int level, Tilemap currentMap)
+    {
         for (int y = 0; y < size; y++)
         {
             for (int x = 0; x < size; x++)
             {
-                if(treeGrid[x,y].isTree == false) { continue; }
-                if(treeGrid[x,y].level == 1) { continue; }
-                if (treeGrid[x, y + 1].isTree == false || treeGrid[x, y - 1].isTree == false)
+                if (treeGrid[x, y].isTree == false) { continue; }
+                if (treeGrid[x, y].level != level) { continue; }
+                if ((treeGrid[x, y - 1].isTree == false || treeGrid[x, y - 1].level != level) && (treeGrid[x, y + 1].isTree == false || treeGrid[x, y + 1].level != level))
                 {
-                    //currentMap.SetTile(new Vector3Int(x, y, 1), null);
-                    //treeGrid[x, y].isTree = false;
-                    //continue;
+                    currentMap.SetTile(new Vector3Int(x, y, 1), null);
+                    treeGrid[x, y].isTree = false;
+                    continue;
                 }
-                if (treeGrid[x,y-1].isTree == false || treeGrid[x, y - 1].level == 1)
+                if (treeGrid[x, y - 1].isTree == false || treeGrid[x, y - 1].level != level)
                 {
                     currentMap.SetTile(new Vector3Int(x, y, 1), forestTiles[0]);
                     continue;
                 }
-                if(treeGrid[x,y+1].isTree == false || treeGrid[x, y + 1].level == 1)
+                if (treeGrid[x, y + 1].isTree == false || treeGrid[x, y + 1].level != level)
                 {
                     currentMap.SetTile(new Vector3Int(x, y, 1), forestTiles[1]);
                     continue;
                 }
                 int rnd = Random.Range(1, 4);
-                if(rnd == 1)
+                if (rnd == 1)
                 {
                     currentMap.SetTile(new Vector3Int(x, y, 1), forestTiles[2]);
                 }
