@@ -664,7 +664,7 @@ MonoBehaviour:
   size: 60
   waterLevel: 0.3
   level1Level: 0.58
-  treeDensity: 0.4
+  treeDensity: 0.5
   treeScale: 0.1
   scale: 0.1
 --- !u!156049354 &1095736876

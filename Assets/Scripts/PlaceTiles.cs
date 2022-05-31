@@ -340,8 +340,15 @@ public class PlaceTiles : MonoBehaviour
                 DetailCell cell = new DetailCell();
                 float noiseValue = noiseMap[x, y];
                 noiseValue -= falloff[x, y];
-                
-                cell.isTree = noiseValue < treeDensity;
+                float v = Random.Range(treeDensity / 2, treeDensity);
+                if(noiseMap[x,y] < v)
+                {
+                    cell.isTree = true;
+                }
+                else
+                {
+                    cell.isTree = false;
+                }
                 if(grid0[x,y].isWater == true || grid0[x,y].isBottomEdge == true || grid1[x,y].isBottomEdge == true)
                 {
                     cell.isTree = false;
