@@ -666,6 +666,11 @@ MonoBehaviour:
   detailTiles:
   - {fileID: 11400000, guid: 9299333a9d868324c8e171a685c59edf, type: 2}
   - {fileID: 11400000, guid: 2db53c2baf9c9a04c8fcc357284d1341, type: 2}
+  rockTiles:
+  - {fileID: 11400000, guid: 72ac5f0a423b72a4e8563afcdc1319dc, type: 2}
+  - {fileID: 11400000, guid: da91ef06dd6dae242ba8dcc6dde0202b, type: 2}
+  - {fileID: 11400000, guid: 660cc892ec142e44c860b1b9086ac77a, type: 2}
+  - {fileID: 11400000, guid: 5d0e6043be126c84eb50534132632d9e, type: 2}
   size: 60
   waterLevel: 0.3
   level1Level: 0.58

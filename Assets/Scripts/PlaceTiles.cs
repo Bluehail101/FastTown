@@ -17,6 +17,7 @@ public class PlaceTiles : MonoBehaviour
     public List<Tile> tileSprites;
     public List<Tile> forestTiles;
     public List<Tile> detailTiles;
+    public List<Tile> rockTiles;
 
     public Dictionary<string, Tile> tiles = new Dictionary<string, Tile>();
 
@@ -35,7 +36,7 @@ public class PlaceTiles : MonoBehaviour
     Cell[,] grid0;
     Cell[,] grid1;
     DetailCell[,] treeGrid;
-    DetailCell[,] grassGrid;
+    DetailCell[,] detailGrid;
 
     public void Start()
     {
@@ -427,7 +428,7 @@ public class PlaceTiles : MonoBehaviour
                 noiseMap[x, y] = noiseValue;
             }
         }
-        grassGrid = new DetailCell[size, size];
+        detailGrid = new DetailCell[size, size];
 
         for (int y = 0; y < size; y++)
         {
@@ -450,7 +451,7 @@ public class PlaceTiles : MonoBehaviour
                     cell.isGrass = false;
                 }
                 
-                grassGrid[x, y] = cell;
+                detailGrid[x, y] = cell;
             }
         }
 
@@ -458,11 +459,15 @@ public class PlaceTiles : MonoBehaviour
         {
             for (int x = 0; x < size; x++)
             {
-                if (grassGrid[x, y].isGrass == false) { continue; }
-                int rnd = Random.Range(1, 6);
+                if (detailGrid[x, y].isGrass == false) { continue; }
+                int rnd = Random.Range(1, 8);
                 if (rnd == 1)
                 {
                     currentMap.SetTile(new Vector3Int(x, y, 1), detailTiles[1]);
+                }
+                else if (rnd == 2 && treeGrid[x,y].isTree == false)
+                {
+                    currentMap.SetTile(new Vector3Int(x, y, 1), rockTiles[Random.Range(0, rockTiles.Count)]);
                 }
                 else
                 {
