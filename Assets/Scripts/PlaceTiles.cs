@@ -126,6 +126,7 @@ public class PlaceTiles : MonoBehaviour
         cleanUpPass2(grid1, level1);
         treePass(falloffMap);
         detailPass(details, falloffMap);
+        Debug.Log(level1.LocalToCell(new Vector3(50,50,0)));
     }
     public void drawTiles(Cell[,] grid, Tilemap currentMap, bool spawnWater)
     {
