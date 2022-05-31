@@ -8,23 +8,34 @@ public class PlaceTiles : MonoBehaviour
     public Tilemap level0;
     public Tilemap level1;
     public Tilemap trees;
+    public Tilemap upperTrees;
+    public Tilemap details;
     public Tile tileGrass;
     public Tile tileEdge;
     public Tile treeTile;
+
     public List<Tile> tileSprites;
     public List<Tile> forestTiles;
+    public List<Tile> detailTiles;
+
     public Dictionary<string, Tile> tiles = new Dictionary<string, Tile>();
 
     public int size;
     public float waterLevel;
     public float level1Level;
+
     public float treeDensity;
     public float treeScale;
+
+    public float grassDensity;
+    public float grassScale;
+
     public float scale;
 
     Cell[,] grid0;
     Cell[,] grid1;
     DetailCell[,] treeGrid;
+    DetailCell[,] grassGrid;
 
     public void Start()
     {
@@ -110,7 +121,8 @@ public class PlaceTiles : MonoBehaviour
         cornerPass(grid1, level1);
         cleanUpPass(grid1, level1);
         cleanUpPass2(grid1, level1);
-        treePass(trees, falloffMap);
+        treePass(falloffMap);
+        detailPass(details, falloffMap);
     }
     public void drawTiles(Cell[,] grid, Tilemap currentMap, bool spawnWater)
     {
@@ -319,7 +331,7 @@ public class PlaceTiles : MonoBehaviour
         return edges;
     }
 
-    public void treePass(Tilemap currentMap, float[,] falloff)
+    public void treePass(float[,] falloff)
     {
         float[,] noiseMap = new float[size, size];
         (float xOffset, float yOffset) = (Random.Range(-10000f, 10000f), Random.Range(-10000f, 10000f));
@@ -364,8 +376,8 @@ public class PlaceTiles : MonoBehaviour
                 treeGrid[x, y] = cell;
             }
         }
-        placeTrees(0, currentMap);
-        placeTrees(1, currentMap);
+        placeTrees(0, trees);
+        placeTrees(1, upperTrees);
         
     }
     public void placeTrees(int level, Tilemap currentMap)
@@ -378,8 +390,8 @@ public class PlaceTiles : MonoBehaviour
                 if (treeGrid[x, y].level != level) { continue; }
                 if ((treeGrid[x, y - 1].isTree == false || treeGrid[x, y - 1].level != level) && (treeGrid[x, y + 1].isTree == false || treeGrid[x, y + 1].level != level))
                 {
-                    currentMap.SetTile(new Vector3Int(x, y, 1), null);
-                    treeGrid[x, y].isTree = false;
+                    currentMap.SetTile(new Vector3Int(x, y, 1), forestTiles[0]);
+                    currentMap.SetTile(new Vector3Int(x, y + 1, 1), forestTiles[1]);
                     continue;
                 }
                 if (treeGrid[x, y - 1].isTree == false || treeGrid[x, y - 1].level != level)
@@ -389,8 +401,7 @@ public class PlaceTiles : MonoBehaviour
                 }
                 if (treeGrid[x, y + 1].isTree == false || treeGrid[x, y + 1].level != level)
                 {
-                    currentMap.SetTile(new Vector3Int(x, y, 1), forestTiles[1]);
-                    continue;
+                    currentMap.SetTile(new Vector3Int(x, y + 1, 1), forestTiles[1]);
                 }
                 int rnd = Random.Range(1, 4);
                 if (rnd == 1)
@@ -400,6 +411,62 @@ public class PlaceTiles : MonoBehaviour
                 else
                 {
                     currentMap.SetTile(new Vector3Int(x, y, 1), forestTiles[3]);
+                }
+            }
+        }
+    }
+    public void detailPass(Tilemap currentMap, float[,] falloff)
+    {
+        float[,] noiseMap = new float[size, size];
+        (float xOffset, float yOffset) = (Random.Range(-10000f, 10000f), Random.Range(-10000f, 10000f));
+        for (int y = 0; y < size; y++)
+        {
+            for (int x = 0; x < size; x++)
+            {
+                float noiseValue = Mathf.PerlinNoise(x * grassScale + xOffset, y * grassScale + yOffset);
+                noiseMap[x, y] = noiseValue;
+            }
+        }
+        grassGrid = new DetailCell[size, size];
+
+        for (int y = 0; y < size; y++)
+        {
+            for (int x = 0; x < size; x++)
+            {
+                DetailCell cell = new DetailCell();
+                float noiseValue = noiseMap[x, y];
+                noiseValue -= falloff[x, y];
+                float v = Random.Range(grassDensity / 2, grassDensity);
+                if (noiseMap[x, y] < v)
+                {
+                    cell.isGrass = true;
+                }
+                else
+                {
+                    cell.isGrass = false;
+                }
+                if (grid0[x, y].isWater == true || grid0[x, y].isBottomEdge == true || grid1[x, y].isBottomEdge == true)
+                {
+                    cell.isGrass = false;
+                }
+                
+                grassGrid[x, y] = cell;
+            }
+        }
+
+        for (int y = 0; y < size; y++)
+        {
+            for (int x = 0; x < size; x++)
+            {
+                if (grassGrid[x, y].isGrass == false) { continue; }
+                int rnd = Random.Range(1, 6);
+                if (rnd == 1)
+                {
+                    currentMap.SetTile(new Vector3Int(x, y, 1), detailTiles[1]);
+                }
+                else
+                {
+                    currentMap.SetTile(new Vector3Int(x, y, 1), detailTiles[0]);
                 }
             }
         }
