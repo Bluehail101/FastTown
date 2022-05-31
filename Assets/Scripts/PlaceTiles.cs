@@ -31,6 +31,8 @@ public class PlaceTiles : MonoBehaviour
     public float grassDensity;
     public float grassScale;
 
+    public int goldSparsity;
+
     public float scale;
 
     Cell[,] grid0;
@@ -454,7 +456,7 @@ public class PlaceTiles : MonoBehaviour
                 detailGrid[x, y] = cell;
             }
         }
-
+        int rockcounter = 0;
         for (int y = 0; y < size; y++)
         {
             for (int x = 0; x < size; x++)
@@ -467,8 +469,13 @@ public class PlaceTiles : MonoBehaviour
                 }
                 else if (rnd == 2 && treeGrid[x,y].isTree == false)
                 {
-                    currentMap.SetTile(new Vector3Int(x, y, 1), rockTiles[Random.Range(0, rockTiles.Count)]);
+                    currentMap.SetTile(new Vector3Int(x, y, 1), rockTiles[Random.Range(0, rockTiles.Count - 1 )]);
                     detailGrid[x, y].isRock = true;
+                    rockcounter += 1;
+                    if (rockcounter != goldSparsity) { continue; }
+                    rockcounter = 0;
+                    currentMap.SetTile(new Vector3Int(x, y, 1), rockTiles[4]);
+                    detailGrid[x, y].isGold = true;
                 }
                 else
                 {

@@ -671,6 +671,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: da91ef06dd6dae242ba8dcc6dde0202b, type: 2}
   - {fileID: 11400000, guid: 660cc892ec142e44c860b1b9086ac77a, type: 2}
   - {fileID: 11400000, guid: 5d0e6043be126c84eb50534132632d9e, type: 2}
+  - {fileID: 11400000, guid: 183e19fd3447cef4091d7d1b0608dbae, type: 2}
   size: 60
   waterLevel: 0.3
   level1Level: 0.58
@@ -678,6 +679,7 @@ MonoBehaviour:
   treeScale: 0.1
   grassDensity: 0.6
   grassScale: 0.5
+  goldSparsity: 3
   scale: 0.1
 --- !u!156049354 &1095736876
 Grid:

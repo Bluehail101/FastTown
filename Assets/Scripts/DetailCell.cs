@@ -8,5 +8,6 @@ public class DetailCell
     public bool isTree;
     public bool isGrass;
     public bool isRock;
+    public bool isGold;
     public int level;
 }
