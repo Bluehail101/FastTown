@@ -176,7 +176,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 34.5
+  orthographic size: 22.606092
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -200,7 +200,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 52.7, y: 48.9, z: -10}
+  m_LocalPosition: {x: 30, y: 31, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -364,28 +364,42 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   m_TileMatrixArray:
   - m_RefCount: 0
     m_Data:
-      e00: -1.084227e-19
-      e01: 2.84098e+13
-      e02: 2.8407954e+13
-      e03: 2.8407954e+13
-      e10: 8.41e-43
-      e11: 3.57e-43
-      e12: 3.57e-43
-      e13: 3.57e-43
+      e00: 1.084227e-19
+      e01: -7.0759776e-32
+      e02: -7.0754604e-32
+      e03: -7.0754604e-32
+      e10: 8.35e-43
+      e11: 1.84e-43
+      e12: 1.84e-43
+      e13: 1.84e-43
       e20: 3.768782e-33
-      e21: -1.7567354e+29
-      e22: 8.31797
-      e23: -1.7567354e+29
+      e21: -1.1022e-40
+      e22: -3.8421497
+      e23: -1.1022e-40
       e30: 4.5904e-41
-      e31: 8.42e-43
-      e32: 8.41e-43
-      e33: 8.42e-43
+      e31: 8.37e-43
+      e32: 8.34e-43
+      e33: 8.37e-43
   m_TileColorArray:
   - m_RefCount: 0
-    m_Data: {r: -1.7606252e+29, g: -1.7606252e+29, b: -1.7606252e+29, a: -1.7606252e+29}
+    m_Data: {r: -1.9959e-40, g: -1.9959e-40, b: -1.9959e-40, a: -1.9959e-40}
   m_TileObjectToInstantiateArray:
   - m_RefCount: 0
     m_Data: {fileID: 0}
@@ -641,9 +655,9 @@ MonoBehaviour:
   trees: {fileID: 1279951353}
   upperTrees: {fileID: 901399838}
   details: {fileID: 1441532186}
-  tileGrass: {fileID: 11400000, guid: 9c80196a7acde974c92200a79fe7ffae, type: 2}
-  tileEdge: {fileID: 11400000, guid: 9f6cd4230b7855245ae4978359f14ef1, type: 2}
-  treeTile: {fileID: 11400000, guid: 1b4b0fefd2e43f1469aac752f7f5d6e5, type: 2}
+  tileWater: {fileID: 11400000, guid: a962f4647511aee4cb885ce9f5711a1a, type: 2}
+  groundTileLower: {fileID: 11400000, guid: d654d16f49c1df24d8b9ff6b6ff5f504, type: 2}
+  groundTileUpper: {fileID: 11400000, guid: 045a956f2df863e4aa87539eccef818e, type: 2}
   tileSprites:
   - {fileID: 11400000, guid: a9c977425c2ac01429cf400dde956748, type: 2}
   - {fileID: 11400000, guid: 0008836a9944c94438f0c316ab2a9760, type: 2}

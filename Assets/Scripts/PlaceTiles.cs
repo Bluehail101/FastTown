@@ -10,9 +10,12 @@ public class PlaceTiles : MonoBehaviour
     public Tilemap trees;
     public Tilemap upperTrees;
     public Tilemap details;
-    public Tile tileGrass;
-    public Tile tileEdge;
-    public Tile treeTile;
+
+    public Tile tileWater;
+
+    public RuleTile groundTileLower;
+    public RuleTile groundTileUpper;
+    private RuleTile groundTile;
 
     public List<Tile> tileSprites;
     public List<Tile> forestTiles;
@@ -42,23 +45,6 @@ public class PlaceTiles : MonoBehaviour
 
     public void Start()
     {
-        tiles.Add("1001", tileSprites[0]);
-        tiles.Add("1000", tileSprites[1]);
-        tiles.Add("1100", tileSprites[2]);
-        tiles.Add("0001", tileSprites[3]);
-        tiles.Add("0100", tileSprites[4]);
-        tiles.Add("0101", tileSprites[5]);
-        tiles.Add("0000", tileSprites[6]);
-        tiles.Add("1111", tileSprites[7]);
-        tiles.Add("0010", tileSprites[8]);
-        tiles.Add("0011", tileSprites[9]);
-        tiles.Add("0110", tileSprites[10]);
-        tiles.Add("1010", tileSprites[10]);
-        tiles.Add("1101", tileSprites[14]);
-        tiles.Add("1110", tileSprites[15]);
-        tiles.Add("1011", tileSprites[16]);
-        tiles.Add("0111", tileSprites[17]);
-
         float[,] noiseMap = new float[size, size];
         (float xOffset, float yOffset) = (Random.Range(-10000f, 10000f), Random.Range(-10000f, 10000f));
         for (int y = 0; y < size; y++)
@@ -109,23 +95,15 @@ public class PlaceTiles : MonoBehaviour
         }
 
 
-
+        groundTile = groundTileLower;
         drawTiles(grid0, level0, true);
-        cornerPass(grid0, level0);
-        cleanUpPass(grid0, level0);
-
-        tiles["0010"] = tileSprites[22];
-        tiles["0011"] = tileSprites[21];
-        tiles["0110"] = tileSprites[24];
-        tiles["0111"] = tileSprites[23];
-        tiles["1111"] = tileSprites[6];
-
+        groundTile = groundTileUpper;
         drawTiles(grid1, level1, false);
-        cornerPass(grid1, level1);
-        cleanUpPass(grid1, level1);
-        cleanUpPass2(grid1, level1);
-        treePass(falloffMap);
-        detailPass(details, falloffMap);
+        //cornerPass(grid1, level1);
+        //cleanUpPass(grid1, level1);
+        //cleanUpPass2(grid1, level1);
+        //treePass(falloffMap);
+        //detailPass(details, falloffMap);
     }
     public void drawTiles(Cell[,] grid, Tilemap currentMap, bool spawnWater)
     {
@@ -133,51 +111,15 @@ public class PlaceTiles : MonoBehaviour
         {
             for (int x = 0; x < size; x++)
             {
-                Tile currentTile;
                 if (grid[x,y].isWater == true)
                 {
-                    if(spawnWater == true)
-                    {
-                        currentTile = tiles["1111"];
-                    }
-                    else
-                    {
-                        continue;
-                    }
+                    if(spawnWater == false) { continue; }
+                    currentMap.SetTile(new Vector3Int(x, y, 1), tileWater);
                 }
                 else
                 {
-                   
-                    try
-                    {
-                        string tileString = checkNextToWater(grid, x, y);
-                        currentTile = tiles[tileString];
-                        if(currentTile.name[currentTile.name.Length - 1].ToString() == "1")
-                        {
-                            grid[x, y].isBottomCorner = true;
-                        }
-                        if(tileString[2].ToString() == "1")
-                        {
-                            grid[x, y].isBottomEdge = true;
-                        }
-                        if(tileString == "1011" || tileString == "1110")
-                        {
-                            grid[x, y].isEndPiece = true;
-                        }
-                        if (tileString == "0111")
-                        {
-                            grid[x, y].isBottomEndPiece = true;
-                        }
-                    }
-                    catch
-                    {
-                        currentTile = tiles["1111"];
-                    }
-
-                }
-                currentMap.SetTile(new Vector3Int(x, y, 1), currentTile);
-               
-
+                    currentMap.SetTile(new Vector3Int(x, y, 1), groundTile);
+                }               
             }
         }
         
