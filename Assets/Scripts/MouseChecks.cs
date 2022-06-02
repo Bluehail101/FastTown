@@ -6,6 +6,7 @@ using UnityEngine.Tilemaps;
 public class MouseChecks : MonoBehaviour
 {
     public Tilemap map;
+    public Tilemap buildingMap;
     public Tile cursorTile;
     private Vector3Int highlightedTile;
     private Vector3Int currentTile;
@@ -18,6 +19,18 @@ public class MouseChecks : MonoBehaviour
             map.SetTile(highlightedTile, null);
             highlightedTile = currentTile;
         }
+        if(AccessBuildings.selectedBuilding != null)
+        {
+            map.SetTile(currentTile, AccessBuildings.selectedBuilding.buildingTile);
+            return;
+        }
         map.SetTile(currentTile, cursorTile);
+    }
+
+    public void OnMouseDown()
+    {
+        if(AccessBuildings.selectedBuilding == null) { return; }
+        buildingMap.SetTile(currentTile, AccessBuildings.selectedBuilding.buildingTile);
+        Debug.Log("click");
     }
 }
