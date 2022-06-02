@@ -5,37 +5,39 @@ using UnityEngine.Tilemaps;
 
 public class PlaceTiles : MonoBehaviour
 {
+    [Header("Tilemaps:")]
     public Tilemap level0;
     public Tilemap level1;
     public Tilemap trees;
     public Tilemap upperTrees;
     public Tilemap details;
-
+    [Header("Tiles:")]
     public Tile tileWater;
-
     public RuleTile groundTileLower;
     public RuleTile groundTileUpper;
     private RuleTile groundTile;
 
-    public List<Tile> tileSprites;
+    [Header("Tile Lists:")]
     public List<Tile> forestTiles;
     public List<Tile> detailTiles;
     public List<Tile> rockTiles;
 
     public Dictionary<string, Tile> tiles = new Dictionary<string, Tile>();
 
+    [Header("Generation Stats:")]
     public int size;
+    [Space(10)]
     public float waterLevel;
     public float level1Level;
-
+    [Space(10)]
     public float treeDensity;
     public float treeScale;
-
+    [Space(10)]
     public float grassDensity;
     public float grassScale;
-
+    [Space(10)]
     public int goldSparsity;
-
+    [Space(10)]
     public float scale;
 
     Cell[,] grid0;
@@ -99,11 +101,8 @@ public class PlaceTiles : MonoBehaviour
         drawTiles(grid0, level0, true);
         groundTile = groundTileUpper;
         drawTiles(grid1, level1, false);
-        //cornerPass(grid1, level1);
-        //cleanUpPass(grid1, level1);
-        //cleanUpPass2(grid1, level1);
-        //treePass(falloffMap);
-        //detailPass(details, falloffMap);
+        treePass(falloffMap);
+        detailPass(details, falloffMap);
     }
     public void drawTiles(Cell[,] grid, Tilemap currentMap, bool spawnWater)
     {
@@ -119,163 +118,13 @@ public class PlaceTiles : MonoBehaviour
                 else
                 {
                     currentMap.SetTile(new Vector3Int(x, y, 1), groundTile);
+                    if(grid[x,y -1].isWater == false) { continue; }
+                    grid[x, y].isBottomEdge = true;
                 }               
             }
         }
         
     }
-
-    public void cornerPass(Cell[,] grid, Tilemap currentMap)
-    {
-        for (int y = 0; y < size; y++)
-        {
-            for (int x = 0; x < size; x++)
-            {
-                if(grid[x, y].isEndPiece == true) { continue; }
-                if(grid[x, y].isBottomCorner == false && grid[x, y].isBottomEdge == true)
-                {
-                    if (grid[x - 1, y].isWater == false)
-                    {
-                        if (grid[x - 1, y - 1].isWater == false) { currentMap.SetTile(new Vector3Int(x - 1, y, 1), tileSprites[11]); }
-                    }
-                    if (grid[x + 1, y].isWater == false)
-                    {
-                        if (grid[x + 1, y - 1].isWater == false) { currentMap.SetTile(new Vector3Int(x + 1, y, 1), tileSprites[12]); }
-                    }
-                }
-
-
-                if (grid[x, y].isBottomCorner == false) { continue; }
-
-                if (grid[x - 1, y].isWater == true)
-                {
-                    if(grid[x - 1, y + 1].isWater == false) { currentMap.SetTile(new Vector3Int(x, y + 1, 1), tileSprites[12]); }                  
-                }
-                else
-                {
-                    if (grid[x - 1, y - 1].isWater == false) { currentMap.SetTile(new Vector3Int(x - 1, y, 1), tileSprites[11]); }
-                }
-                if (grid[x + 1, y].isWater == true)
-                {
-                    if (grid[x + 1, y + 1].isWater == false) { currentMap.SetTile(new Vector3Int(x, y + 1, 1), tileSprites[11]); }
-                }
-                else
-                {
-                    if (grid[x + 1, y - 1].isWater == false) { currentMap.SetTile(new Vector3Int(x + 1, y, 1), tileSprites[12]); }
-                }
-
-            }
-        }
-    }
-
-    public void cleanUpPass(Cell[,] grid, Tilemap currentMap)
-    {
-        for (int y = 0; y < size; y++)
-        {
-            for (int x = 0; x < size; x++)
-            {
-                if(grid[x, y].isBottomEndPiece == true)
-                {
-                    if (grid[x - 1, y + 1].isWater == false && grid[x + 1, y + 1].isWater == false)
-                    {
-                        currentMap.SetTile(new Vector3Int(x, y + 1, 1), tileSprites[18]);
-                        continue;
-                    }
-                    if (grid[x - 1, y + 1].isWater == true && grid[x + 1, y + 1].isWater == false)
-                    {
-                        currentMap.SetTile(new Vector3Int(x, y + 1, 1), tileSprites[19]);
-                        continue;
-                    }
-                    if (grid[x - 1, y + 1].isWater == false && grid[x + 1, y + 1].isWater == true)
-                    {
-                        currentMap.SetTile(new Vector3Int(x, y + 1, 1), tileSprites[20]);
-                        continue;
-                    }
-                }
-                if(grid[x,y].isEndPiece == false) { continue; }
-                if(grid[x - 1,y].isWater == true)
-                {
-                    if(tiles["1111"] == tileSprites[6])
-                    {
-                        currentMap.SetTile(new Vector3Int(x, y, 1), null);
-                    }
-                    else
-                    {
-                        currentMap.SetTile(new Vector3Int(x, y, 1), tiles["1111"]);
-                    }
-                    grid[x, y].isWater = true;
-                    if(grid[x + 1, y + 1].isWater == true)
-                    {
-                        currentMap.SetTile(new Vector3Int(x + 1, y, 1), tileSprites[0]);
-                    }
-                    else
-                    {
-                        currentMap.SetTile(new Vector3Int(x + 1, y, 1), tileSprites[3]);
-                    }
-                }
-                else
-                {
-                    if (tiles["1111"] == tileSprites[6])
-                    {
-                        currentMap.SetTile(new Vector3Int(x, y, 1), null);
-                    }
-                    else
-                    {
-                        currentMap.SetTile(new Vector3Int(x, y, 1), tiles["1111"]);
-                    }
-                    grid[x, y].isWater = true;
-                    if (grid[x - 1, y + 1].isWater == true)
-                    {
-                        currentMap.SetTile(new Vector3Int(x - 1, y, 1), tileSprites[2]);
-                    }
-                    else
-                    {
-                        currentMap.SetTile(new Vector3Int(x - 1, y, 1), tileSprites[4]);
-                    }
-                }
-            }
-        }
-    }
-    public void cleanUpPass2(Cell[,] grid, Tilemap currentMap)
-    {
-        for (int y = 0; y < size; y++)
-        {
-            for (int x = 0; x < size; x++)
-            {
-                if(currentMap.GetTile(new Vector3Int (x,y,1)) == tileSprites[6])
-                {
-                    if(checkNextToWater(grid1, x, y) == "1111")
-                    {
-                        currentMap.SetTile(new Vector3Int(x,y,1), null);
-                        grid1[x, y].isWater = true;
-                    }
-                }
-            }
-        }
-    }
-    public string checkNextToWater(Cell[,] grid, int x, int y)
-    {
-        string edges = "";
-        int xMod = 0;
-        int yMod = 0;
-        for (int i = 0; i < 4; i++)
-        {
-            if(i == 0) { xMod = 0; yMod = 1;  }
-            else if (i == 1) { xMod = 1; yMod = 0; }
-            else if (i == 2) { xMod = 0; yMod = -1; }
-            else if (i == 3) { xMod = -1; yMod = 0; }
-            if(grid[x + xMod, y + yMod].isWater == true)
-            {
-                edges += "1";
-            }
-            else
-            {
-                edges += "0";
-            }
-        }
-        return edges;
-    }
-
     public void treePass(float[,] falloff)
     {
         float[,] noiseMap = new float[size, size];

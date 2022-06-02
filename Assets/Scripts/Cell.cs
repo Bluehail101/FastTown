@@ -6,7 +6,4 @@ public class Cell
 {
     public bool isWater;
     public bool isBottomEdge;
-    public bool isBottomCorner;
-    public bool isEndPiece;
-    public bool isBottomEndPiece;
 }
