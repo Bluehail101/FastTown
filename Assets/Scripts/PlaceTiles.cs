@@ -275,4 +275,14 @@ public class PlaceTiles : MonoBehaviour
             }
         }
     }
+
+    public bool checkValid(Vector3Int tile)
+    {
+        if(grid0[tile.x, tile.y].isWater == true) { return false; }
+        if (grid0[tile.x, tile.y].isBottomEdge == true) { return false; }
+        if (grid1[tile.x, tile.y].isBottomEdge == true) { return false; }
+        if(treeGrid[tile.x,tile.y].isTree == true) { return false; }
+        if (detailGrid[tile.x, tile.y].isRock == true) { return false; }
+        return true;
+    }
 }

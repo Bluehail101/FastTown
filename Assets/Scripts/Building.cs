@@ -8,4 +8,5 @@ public class Building : MonoBehaviour
     public Tile buildingTile;
     public string buildingName;
     public bool accessible;
+    public bool deselectOnBuild;
 }

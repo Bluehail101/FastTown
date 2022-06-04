@@ -8,20 +8,27 @@ public class MouseChecks : MonoBehaviour
     public Tilemap map;
     public Tilemap buildingMap;
     public Tile cursorTile;
+    private PlaceTiles tileScript;
     private Vector3Int highlightedTile;
     private Vector3Int currentTile;
+    private Building currentBuilding;
+    void Start()
+    {
+        tileScript = gameObject.GetComponent<PlaceTiles>();
+    }
     void Update()
     {
         Vector3 mouse = Input.mousePosition;
+        currentBuilding = AccessBuildings.selectedBuilding;
         currentTile = map.WorldToCell(Camera.main.ScreenToWorldPoint(mouse));
         if (currentTile != highlightedTile)
         {
             map.SetTile(highlightedTile, null);
             highlightedTile = currentTile;
         }
-        if(AccessBuildings.selectedBuilding != null)
+        if(currentBuilding != null)
         {
-            map.SetTile(currentTile, AccessBuildings.selectedBuilding.buildingTile);
+            map.SetTile(currentTile, currentBuilding.buildingTile);
             return;
         }
         map.SetTile(currentTile, cursorTile);
@@ -29,8 +36,12 @@ public class MouseChecks : MonoBehaviour
 
     public void OnMouseDown()
     {
-        if(AccessBuildings.selectedBuilding == null) { return; }
-        buildingMap.SetTile(currentTile, AccessBuildings.selectedBuilding.buildingTile);
-        Debug.Log("click");
+        if(currentBuilding == null) { return; }
+        if(tileScript.checkValid(currentTile) == false) { return; }
+        buildingMap.SetTile(currentTile, currentBuilding.buildingTile);
+        if(currentBuilding.deselectOnBuild == true)
+        {
+            AccessBuildings.selectedBuilding = null;
+        }
     }
 }
