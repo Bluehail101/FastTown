@@ -8,6 +8,7 @@ public class MouseChecks : MonoBehaviour
     public Tilemap map;
     public Tilemap buildingMap;
     public Tile cursorTile;
+    public float panBorder;
     private PlaceTiles tileScript;
     private Vector3Int highlightedTile;
     private Vector3Int currentTile;
@@ -38,6 +39,7 @@ public class MouseChecks : MonoBehaviour
     {
         if(currentBuilding == null) { return; }
         if(tileScript.checkValid(currentTile) == false) { return; }
+        if(Input.mousePosition.y <  panBorder) { return; }
         buildingMap.SetTile(currentTile, currentBuilding.buildingTile);
         if(currentBuilding.deselectOnBuild == true)
         {
