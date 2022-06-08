@@ -29,7 +29,14 @@ public class MouseChecks : MonoBehaviour
         }
         if(currentBuilding != null)
         {
-            map.SetTile(currentTile, currentBuilding.buildingTile);
+            if (tileScript.checkValid(currentTile, currentBuilding.isMine) == false)
+            {
+                map.SetTile(currentTile, currentBuilding.redTile);
+            }
+            else
+            {
+                map.SetTile(currentTile, currentBuilding.buildingTile);
+            }
             return;
         }
         map.SetTile(currentTile, cursorTile);

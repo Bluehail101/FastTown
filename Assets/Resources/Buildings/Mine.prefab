@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingTile: {fileID: 11400000, guid: bce09c30116742244b16c995488e19a4, type: 2}
+  redTile: {fileID: 11400000, guid: 26be406dc27752648a7861ca5a6665a4, type: 2}
   buildingName: Mine
   accessible: 1
   deselectOnBuild: 1
