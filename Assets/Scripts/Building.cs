@@ -9,4 +9,5 @@ public class Building : MonoBehaviour
     public string buildingName;
     public bool accessible;
     public bool deselectOnBuild;
+    public bool isMine;
 }

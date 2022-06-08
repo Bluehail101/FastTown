@@ -47,3 +47,4 @@ MonoBehaviour:
   buildingName: Mine
   accessible: 1
   deselectOnBuild: 1
+  isMine: 1

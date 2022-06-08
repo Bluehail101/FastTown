@@ -43,7 +43,7 @@ public class PlaceTiles : MonoBehaviour
     Cell[,] grid0;
     Cell[,] grid1;
     DetailCell[,] treeGrid;
-    DetailCell[,] detailGrid;
+    public DetailCell[,] detailGrid;
 
     public void Start()
     {
@@ -276,12 +276,14 @@ public class PlaceTiles : MonoBehaviour
         }
     }
 
-    public bool checkValid(Vector3Int tile)
+    public bool checkValid(Vector3Int tile, bool mineCheck)
     {
         if(grid0[tile.x, tile.y].isWater == true) { return false; }
         if (grid0[tile.x, tile.y].isBottomEdge == true) { return false; }
         if (grid1[tile.x, tile.y].isBottomEdge == true) { return false; }
         if(treeGrid[tile.x,tile.y].isTree == true) { return false; }
+        if (detailGrid[tile.x, tile.y].isGold == true && mineCheck == true) { return true; }
+        if (mineCheck == true) { return false; }
         if (detailGrid[tile.x, tile.y].isRock == true) { return false; }
         return true;
     }
