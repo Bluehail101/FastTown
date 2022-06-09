@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class Building : MonoBehaviour
+[CreateAssetMenu(menuName = "Building")]
+public class Building : ScriptableObject
 {
-    public Tile buildingTile;
+    public Tile mainTile;
     public Tile redTile;
     public string buildingName;
     public bool accessible;

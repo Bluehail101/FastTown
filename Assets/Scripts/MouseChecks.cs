@@ -35,7 +35,7 @@ public class MouseChecks : MonoBehaviour
             }
             else
             {
-                map.SetTile(currentTile, currentBuilding.buildingTile);
+                map.SetTile(currentTile, currentBuilding.mainTile);
             }
             return;
         }
@@ -47,7 +47,7 @@ public class MouseChecks : MonoBehaviour
         if(currentBuilding == null) { return; }
         if(tileScript.checkValid(currentTile, currentBuilding.isMine) == false) { return; }
         if(Input.mousePosition.y <  panBorder) { return; }
-        buildingMap.SetTile(currentTile, currentBuilding.buildingTile);
+        buildingMap.SetTile(currentTile, currentBuilding.mainTile);
         if(currentBuilding.deselectOnBuild == true)
         {
             AccessBuildings.selectedBuilding = null;

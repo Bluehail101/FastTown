@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d12ce20e9ef9884448131decc164a6f0, type: 3}
+  m_Name: House
+  m_EditorClassIdentifier: 
+  mainTile: {fileID: 11400000, guid: 19feea459fd69ae49b10ea5548f1abbd, type: 2}
+  redTile: {fileID: 11400000, guid: 5b1cd26333494c944b40569a1628d13e, type: 2}
+  buildingName: House
+  accessible: 1
+  deselectOnBuild: 1
+  isMine: 0

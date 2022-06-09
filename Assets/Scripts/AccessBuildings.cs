@@ -15,7 +15,7 @@ public class AccessBuildings : MonoBehaviour
         for (int i = 0; i < buttonList.Count; i++)
         {
             if(buildingList[i].accessible == false) { continue; }
-            buttonList[i].image.overrideSprite = buildingList[i].buildingTile.sprite;
+            buttonList[i].image.overrideSprite = buildingList[i].mainTile.sprite;
         }
     }
 
