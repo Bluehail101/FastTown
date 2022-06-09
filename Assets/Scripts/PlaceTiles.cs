@@ -44,6 +44,7 @@ public class PlaceTiles : MonoBehaviour
     Cell[,] grid1;
     DetailCell[,] treeGrid;
     public DetailCell[,] detailGrid;
+    public BuildingCell[,] buildingGrid;
 
     public void Start()
     {
@@ -93,6 +94,16 @@ public class PlaceTiles : MonoBehaviour
                 noiseValue -= falloffMap[x, y];
                 cell.isWater = noiseValue < level1Level;
                 grid1[x, y] = cell;
+            }
+        }
+
+        buildingGrid = new BuildingCell[size, size];
+        for (int y = 0; y < size; y++)
+        {
+            for (int x = 0; x < size; x++)
+            {
+                BuildingCell cell = new BuildingCell();
+                buildingGrid[x, y] = cell;
             }
         }
 
@@ -282,6 +293,7 @@ public class PlaceTiles : MonoBehaviour
         if (grid0[tile.x, tile.y].isBottomEdge == true) { return false; }
         if (grid1[tile.x, tile.y].isBottomEdge == true) { return false; }
         if(treeGrid[tile.x,tile.y].isTree == true) { return false; }
+        if(buildingGrid[tile.x,tile.y].isBuilding == true) { return false; }
         if (detailGrid[tile.x, tile.y].isGold == true && mineCheck == true) { return true; }
         if (mineCheck == true) { return false; }
         if (detailGrid[tile.x, tile.y].isRock == true) { return false; }

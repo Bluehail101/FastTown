@@ -48,6 +48,7 @@ public class MouseChecks : MonoBehaviour
         if(tileScript.checkValid(currentTile, currentBuilding.isMine) == false) { return; }
         if(Input.mousePosition.y <  panBorder) { return; }
         buildingMap.SetTile(currentTile, currentBuilding.mainTile);
+        tileScript.buildingGrid[currentTile.x, currentTile.y].isBuilding = true;
         if(currentBuilding.deselectOnBuild == true)
         {
             AccessBuildings.selectedBuilding = null;
