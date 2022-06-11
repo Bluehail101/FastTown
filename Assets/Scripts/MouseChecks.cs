@@ -13,9 +13,11 @@ public class MouseChecks : MonoBehaviour
     private Vector3Int highlightedTile;
     private Vector3Int currentTile;
     private Building currentBuilding;
+    private Resource resourceScript;
     void Start()
     {
         tileScript = gameObject.GetComponent<PlaceTiles>();
+        resourceScript = gameObject.GetComponent<Resource>();
     }
     void Update()
     {
@@ -49,6 +51,13 @@ public class MouseChecks : MonoBehaviour
         if(Input.mousePosition.y <  panBorder) { return; }
         buildingMap.SetTile(currentTile, currentBuilding.mainTile);
         tileScript.buildingGrid[currentTile.x, currentTile.y].isBuilding = true;
+        if(currentBuilding.isProducer == true)
+        {
+            for (int i = 0; i < resourceScript.rateList.Count; i++)
+            {
+                resourceScript.rateList[i] += currentBuilding.producingList[i];
+            }
+        }
         if(currentBuilding.deselectOnBuild == true)
         {
             AccessBuildings.selectedBuilding = null;
