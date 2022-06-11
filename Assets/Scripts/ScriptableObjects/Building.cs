@@ -8,6 +8,8 @@ public class Building : ScriptableObject
 {
     public Tile mainTile;
     public Tile redTile;
+    public RuleTile ruleTile;
+    public bool isRuleTile;
     public string buildingName;
     public int num;
     public bool accessible;
