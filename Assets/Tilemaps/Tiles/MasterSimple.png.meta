@@ -411,6 +411,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -3196,6 +3197,136 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      MasterSimple_52: -9085642482949550184
+      MasterSimple_56: -1272707707472379431
+      MasterSimple_103: 809731650272401918
+      MasterSimple_22: 5559365295119268544
+      MasterSimple_9: 6141977906785566017
+      MasterSimple_26: -2183257237447893284
+      MasterSimple_75: 8605038845713285227
+      MasterSimple_50: -2875302415566617158
+      MasterSimple_74: 4615400645524915816
+      MasterSimple_59: -7774529431234932289
+      MasterSimple_73: 8750599911656217038
+      MasterSimple_29: 7897865600900749419
+      MasterSimple_117: -6799275019949285875
+      MasterSimple_14: 7265009349230476139
+      MasterSimple_79: -1288644278568201650
+      MasterSimple_39: -5185817320034809976
+      MasterSimple_42: -7070442026921764306
+      MasterSimple_109: -171467609066355046
+      MasterSimple_13: -2964983871466915192
+      MasterSimple_111: -7566093758238056970
+      MasterSimple_64: -4656495266520736778
+      MasterSimple_120: -8401493888384078821
+      MasterSimple_115: -324784803104131219
+      MasterSimple_10: 4213697593180751991
+      MasterSimple_35: 2841887165690414205
+      MasterSimple_36: 6411237741587702924
+      MasterSimple_44: -5347756162122514437
+      MasterSimple_119: -7256859470943297031
+      MasterSimple_87: 4942835418953182774
+      MasterSimple_4: -1515529592146115831
+      MasterSimple_47: 2907964768960513033
+      MasterSimple_27: 1602169693708189511
+      MasterSimple_93: 4517126599178241322
+      MasterSimple_106: 7752252249886964783
+      MasterSimple_123: -6038396372991950210
+      MasterSimple_63: 5681972907017594937
+      MasterSimple_99: 6955784976559832818
+      MasterSimple_70: -2074979668563066052
+      MasterSimple_30: 4635544273664123700
+      MasterSimple_28: 2302856217589988318
+      MasterSimple_53: 3556131983599145711
+      MasterSimple_3: -9064878579041556281
+      MasterSimple_104: -4979110775130052237
+      MasterSimple_77: 3657121085991802929
+      MasterSimple_110: -2492140323690652123
+      MasterSimple_80: 2221544083757665050
+      MasterSimple_89: 848326924493997271
+      MasterSimple_5: 6020948795560916884
+      MasterSimple_54: -2710173194447000769
+      MasterSimple_101: 4350901257365115337
+      MasterSimple_19: 6680811175620112362
+      MasterSimple_113: -839538241691524822
+      MasterSimple_57: -2646277951975928239
+      MasterSimple_107: 3049440373876892282
+      MasterSimple_116: 7679491602543830968
+      MasterSimple_2: 4768616314829581308
+      MasterSimple_69: -3762353617567029232
+      MasterSimple_128: 4374191066375634296
+      MasterSimple_102: -9197346352015721562
+      MasterSimple_31: -8993475138852758941
+      MasterSimple_18: -5480106465884258871
+      MasterSimple_62: 5295996194726818255
+      MasterSimple_48: 8880547391745602220
+      MasterSimple_43: 2898200346120328797
+      MasterSimple_8: 8506700045664631971
+      MasterSimple_124: 7912262908881961567
+      MasterSimple_11: -2699099447236000716
+      MasterSimple_71: 3141997757503251670
+      MasterSimple_95: -7946574551780441326
+      MasterSimple_16: -1398811284227543869
+      MasterSimple_32: -1302375387128644784
+      MasterSimple_58: -8468749432144801289
+      MasterSimple_66: 193216005886954032
+      MasterSimple_17: -8710730982251006312
+      MasterSimple_94: 6918950160594375999
+      MasterSimple_85: 6192416477896150221
+      MasterSimple_40: -5917353452204054851
+      MasterSimple_108: -1029619535752874277
+      MasterSimple_7: -447831516435452837
+      MasterSimple_34: 1339918561937984209
+      MasterSimple_100: -3046332352755089439
+      MasterSimple_49: -8063915314192306713
+      MasterSimple_1: -7815552684311478262
+      MasterSimple_96: -4798746542758643252
+      MasterSimple_6: 7188474964662861874
+      MasterSimple_91: -4302569075270200280
+      MasterSimple_98: 3066784585063467216
+      MasterSimple_121: -7626869191146525084
+      MasterSimple_122: -6244320472654527868
+      MasterSimple_126: -7330611397919368903
+      MasterSimple_33: -1432090488027481632
+      MasterSimple_46: -5820226837535006025
+      MasterSimple_15: -7742663182472369658
+      MasterSimple_127: -1416107560936953844
+      MasterSimple_81: 6975009069720521690
+      MasterSimple_38: 3348234404425406810
+      MasterSimple_23: -5039827788640123841
+      MasterSimple_84: -4799045817050363646
+      MasterSimple_125: -5320794379410968501
+      MasterSimple_86: 3681358790423564307
+      MasterSimple_12: -4027158114308459776
+      MasterSimple_76: -1271777567531452403
+      MasterSimple_45: -3325185229368400005
+      MasterSimple_114: -190305920934396893
+      MasterSimple_24: -3221555459743561204
+      MasterSimple_60: 2300014716195145866
+      MasterSimple_72: -1716020566733751436
+      MasterSimple_61: -8998716448296668109
+      MasterSimple_67: -5276890943604201090
+      MasterSimple_65: 6461884515661877594
+      MasterSimple_82: 5810630520873043066
+      MasterSimple_83: 2327493720414481303
+      MasterSimple_112: 1169194510385257792
+      MasterSimple_90: -259087873845374937
+      MasterSimple_78: -5524836330562628788
+      MasterSimple_37: -8386641446452217954
+      MasterSimple_92: -2057483091416464337
+      MasterSimple_51: 1681653403696866775
+      MasterSimple_88: -223194311561906324
+      MasterSimple_20: -6241196722120740018
+      MasterSimple_118: -4652872743699377273
+      MasterSimple_105: -3319327006433614158
+      MasterSimple_21: -8406525109793493779
+      MasterSimple_68: 3742749043390659203
+      MasterSimple_25: 5540386224986252709
+      MasterSimple_97: 4586306498486254782
+      MasterSimple_0: -637549432657373037
+      MasterSimple_55: -1602462100021968807
+      MasterSimple_41: -7006341972918943918
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
