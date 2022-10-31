@@ -57,12 +57,21 @@ public class MouseChecks : MonoBehaviour
         {
             buildingMap.SetTile(currentTile, currentBuilding.mainTile);
         }
+
         tileScript.buildingGrid[currentTile.x, currentTile.y].isBuilding = true;
+
         if(currentBuilding.isProducer == true)
         {
             for (int i = 0; i < resourceScript.rateList.Count; i++)
             {
                 resourceScript.rateList[i] += currentBuilding.producingList[i];
+            }
+        }
+        if(currentBuilding.isConsumer == true)
+        {
+            for (int i = 0; i < resourceScript.rateList.Count; i++)
+            {
+                resourceScript.rateList[i] -= currentBuilding.cosumingList[i];
             }
         }
         if(currentBuilding.deselectOnBuild == true)

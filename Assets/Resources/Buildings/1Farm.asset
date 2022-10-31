@@ -22,7 +22,13 @@ MonoBehaviour:
   deselectOnBuild: 0
   isMine: 0
   isProducer: 1
+  isConsumer: 0
   producingList:
   - 0
   - 1
   - 0
+  cosumingList:
+  - 0.2
+  - 0
+  - 0
+  costList: []

@@ -22,4 +22,10 @@ MonoBehaviour:
   deselectOnBuild: 0
   isMine: 0
   isProducer: 0
+  isConsumer: 1
   producingList: []
+  cosumingList:
+  - 0
+  - 0.3
+  - 0
+  costList: []

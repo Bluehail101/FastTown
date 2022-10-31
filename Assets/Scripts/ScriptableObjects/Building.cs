@@ -20,4 +20,5 @@ public class Building : ScriptableObject
     [Header("Gold, Food, Wood")]
     public List<float> producingList = new List<float>();
     public List<float> cosumingList = new List<float>();
+    public List<float> costList = new List<float>();
 }

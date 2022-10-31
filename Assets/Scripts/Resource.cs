@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -35,8 +36,8 @@ public class Resource : MonoBehaviour
 
     public void updateResources()
     {
-        goldText.text = "Gold: " + gold.ToString();
-        foodText.text = "Food: " + food.ToString();
-        woodText.text = "Wood: " + wood.ToString();
+        goldText.text = "Gold: " + MathF.Truncate(gold).ToString();
+        foodText.text = "Food: " + MathF.Truncate(food).ToString();
+        woodText.text = "Wood: " + MathF.Truncate(wood).ToString();
     }
 }
