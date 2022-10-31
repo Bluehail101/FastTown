@@ -1,12 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class Resource : MonoBehaviour
 {
     public float gold;
-    public float wood;
     public float food;
+    public float wood;
+
+    public TextMeshProUGUI goldText;
+    public TextMeshProUGUI foodText;
+    public TextMeshProUGUI woodText;
 
     public List<float> rateList = new List<float>();
 
@@ -20,9 +26,17 @@ public class Resource : MonoBehaviour
         while (true)
         {
             gold += rateList[0];
-            wood += rateList[1];
-            food += rateList[2];
+            food += rateList[1];
+            wood += rateList[2];
+            updateResources();
             yield return new WaitForSeconds(0.5f);
         }
+    }
+
+    public void updateResources()
+    {
+        goldText.text = "Gold: " + gold.ToString();
+        foodText.text = "Food: " + food.ToString();
+        woodText.text = "Wood: " + wood.ToString();
     }
 }

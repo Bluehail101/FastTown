@@ -10,11 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d12ce20e9ef9884448131decc164a6f0, type: 3}
-  m_Name: House
+  m_Name: 4Lumber
   m_EditorClassIdentifier: 
-  mainTile: {fileID: 11400000, guid: 19feea459fd69ae49b10ea5548f1abbd, type: 2}
-  redTile: {fileID: 11400000, guid: 5b1cd26333494c944b40569a1628d13e, type: 2}
-  buildingName: House
+  mainTile: {fileID: 11400000, guid: 33d4faa132eb07a44ba0dc34e9ce315f, type: 2}
+  redTile: {fileID: 11400000, guid: fcb2842446b4eee40ace7eb25cedfacd, type: 2}
+  ruleTile: {fileID: 0}
+  isRuleTile: 0
+  buildingName: Lumber Mill
+  num: 0
   accessible: 1
-  deselectOnBuild: 1
+  deselectOnBuild: 0
   isMine: 0
+  isProducer: 1
+  producingList:
+  - 0
+  - 0
+  - 1
