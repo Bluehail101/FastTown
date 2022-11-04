@@ -28,4 +28,7 @@ MonoBehaviour:
   - 0
   - 0
   cosumingList: []
-  costList: []
+  costList:
+  - 0
+  - 0
+  - 20

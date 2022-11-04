@@ -31,4 +31,7 @@ MonoBehaviour:
   - 0.2
   - 0
   - 0
-  costList: []
+  costList:
+  - 5
+  - 0
+  - 20
