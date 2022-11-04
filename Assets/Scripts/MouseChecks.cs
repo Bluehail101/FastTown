@@ -33,7 +33,7 @@ public class MouseChecks : MonoBehaviour
         //If the mouse is hovering over a different tile than what is stored in currentTile, move the cursor to the new tile.
         if(currentBuilding != null)
         {
-            if (tileScript.checkValid(currentTile, currentBuilding.isMine) == false || checkAffordable(currentBuilding) == false)
+            if (tileScript.checkValid(currentTile, currentBuilding) == false || checkAffordable(currentBuilding) == false)
             {
                 map.SetTile(currentTile, currentBuilding.redTile);
             }
@@ -52,9 +52,9 @@ public class MouseChecks : MonoBehaviour
     public void OnMouseDown()
     {
         if(currentBuilding == null) { return; }
-        if(tileScript.checkValid(currentTile, currentBuilding.isMine) == false) { return; }
+        if(tileScript.checkValid(currentTile, currentBuilding) == false) { return; }
         if(Input.mousePosition.y <  panBorder) { return; }
-        if(checkAffordable(currentBuilding)) { return; }
+        if(checkAffordable(currentBuilding) == false) { return; }
         //If no building is selected, the building is not in a valid location, player cannot afford the building,
         //or the mouse is within range of the pan border, then do not run the code below.
         if (currentBuilding.isRuleTile)
@@ -66,6 +66,8 @@ public class MouseChecks : MonoBehaviour
             buildingMap.SetTile(currentTile, currentBuilding.mainTile);
         }
         //Checks if the tile is a rule tile or normal tile, then places the building down.
+        takeResources(currentBuilding);
+        //Removes the relevant resources.
 
         tileScript.buildingGrid[currentTile.x, currentTile.y].isBuilding = true;
         //Stores the location of the building in the grid, so the game knows it's there.
@@ -94,18 +96,26 @@ public class MouseChecks : MonoBehaviour
 
     public bool checkAffordable(Building building)
     {
-        if (building.costList[0] < resourceScript.gold)
+        if (building.costList[0] > resourceScript.gold && building.costList[0] != 0)
         {
             return false;
         }
-        if (building.costList[1] < resourceScript.food)
+        if (building.costList[1] > resourceScript.food && building.costList[1] != 0)
         {
             return false;
         }
-        if (building.costList[2] < resourceScript.wood)
+        if (building.costList[2] > resourceScript.wood && building.costList[2] != 0)
         {
             return false;
         }
         return true;
+        //If any of the resources are lower than the cost of the building return false, if not return true.
+    }
+
+    public void takeResources(Building building)
+    {
+        resourceScript.gold -= building.costList[0];
+        resourceScript.food -= building.costList[1];
+        resourceScript.wood -= building.costList[2];
     }
 }

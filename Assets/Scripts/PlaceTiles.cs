@@ -277,6 +277,8 @@ public class PlaceTiles : MonoBehaviour
                     if (rockcounter != goldSparsity) { continue; }
                     rockcounter = 0;
                     currentMap.SetTile(new Vector3Int(x, y, 1), rockTiles[4]);
+                    detailGrid[x, y].isRock = false;
+                    //This probably will screw me over later.
                     detailGrid[x, y].isGold = true;
                 }
                 else
@@ -287,16 +289,26 @@ public class PlaceTiles : MonoBehaviour
         }
     }
 
-    public bool checkValid(Vector3Int tile, bool mineCheck)
+    public bool checkValid(Vector3Int tile, Building building)
     {
-        if(grid0[tile.x, tile.y].isWater == true) { return false; }
+        if (buildingGrid[tile.x, tile.y].isBuilding == true) { return false; }
         if (grid0[tile.x, tile.y].isBottomEdge == true) { return false; }
         if (grid1[tile.x, tile.y].isBottomEdge == true) { return false; }
-        if(treeGrid[tile.x,tile.y].isTree == true) { return false; }
-        if(buildingGrid[tile.x,tile.y].isBuilding == true) { return false; }
-        if (detailGrid[tile.x, tile.y].isGold == true && mineCheck == true) { return true; }
-        if (mineCheck == true) { return false; }
-        if (detailGrid[tile.x, tile.y].isRock == true) { return false; }
+
+        if (grid0[tile.x, tile.y].isWater == true && building.validOnWater == false) { return false; }
+        if(treeGrid[tile.x,tile.y].isTree == true && building.validOnTrees == false) { return false; }
+        if (detailGrid[tile.x, tile.y].isRock == true && building.validOnRocks == false) { return false; }
+        if (detailGrid[tile.x, tile.y].isGold == true && building.validOnGoldRocks == false) { return false; }
+        if (grid0[tile.x, tile.y].isWater == false && checkEmpty(tile) == true && building.validOnGrass == false) { return false; }
+        if (grid1[tile.x, tile.y].isWater == false && checkEmpty(tile) == true && building.validOnGrass == false) { return false; }
+        return true;
+    }
+
+    public bool checkEmpty(Vector3Int tile)
+    {
+        if (treeGrid[tile.x,tile.y].isTree) { return false; }
+        if (detailGrid[tile.x, tile.y].isRock) { return false; }
+        if (detailGrid[tile.x, tile.y].isGold) { return false; }
         return true;
     }
 }

@@ -23,6 +23,11 @@ MonoBehaviour:
   isMine: 1
   isProducer: 1
   isConsumer: 0
+  validOnGrass: 0
+  validOnWater: 0
+  validOnTrees: 0
+  validOnRocks: 0
+  validOnGoldRocks: 1
   producingList:
   - 2
   - 0

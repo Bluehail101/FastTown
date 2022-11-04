@@ -12,11 +12,13 @@ public class AccessBuildings : MonoBehaviour
     void Start()
     {
         buildingList.AddRange(Resources.LoadAll<Building>("Buildings"));
+        //Loads all the building scriptable object into a list.
         for (int i = 0; i < buttonList.Count; i++)
         {
             if(buildingList[i].accessible == false) { continue; }
             buttonList[i].image.overrideSprite = buildingList[i].mainTile.sprite;
         }
+        //Sets each button to a building.
     }
 
     public void selectBuilding(int ID)
@@ -26,6 +28,8 @@ public class AccessBuildings : MonoBehaviour
             selectedBuilding = null;
             return;
         }
+        //If the building selected has already been selected, deselect it.
         selectedBuilding = buildingList[ID];
+        //If building has not already been selected then select that building!
     }
 }
