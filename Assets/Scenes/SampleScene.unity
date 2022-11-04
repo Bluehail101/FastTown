@@ -1299,6 +1299,7 @@ GameObject:
   - component: {fileID: 1095736878}
   - component: {fileID: 1095736879}
   - component: {fileID: 1095736880}
+  - component: {fileID: 1095736881}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -1447,6 +1448,21 @@ MonoBehaviour:
   - 0
   - 0
   - 0
+--- !u!114 &1095736881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1095736874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67be430196380944485357b6f1ed4901, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileScript: {fileID: 0}
+  currentTilemap: {fileID: 0}
+  yay: {fileID: 11400000, guid: 5d3739fd52113164391fc73830aa8b37, type: 2}
 --- !u!1 &1279951352
 GameObject:
   m_ObjectHideFlags: 0
@@ -1625,7 +1641,7 @@ TilemapRenderer:
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 0
-  m_Mode: 0
+  m_Mode: 1
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
 --- !u!4 &1279951355
@@ -2906,7 +2922,7 @@ GameObject:
   - component: {fileID: 1970461265}
   - component: {fileID: 1970461264}
   m_Layer: 5
-  m_Name: Building1
+  m_Name: Building0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3343,3 +3359,4 @@ MonoBehaviour:
   - {fileID: 543556852}
   - {fileID: 1892129535}
   - {fileID: 1282667021}
+  - {fileID: 2070671429}

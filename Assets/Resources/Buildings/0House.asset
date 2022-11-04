@@ -15,6 +15,7 @@ MonoBehaviour:
   mainTile: {fileID: 11400000, guid: 19feea459fd69ae49b10ea5548f1abbd, type: 2}
   redTile: {fileID: 11400000, guid: 5b1cd26333494c944b40569a1628d13e, type: 2}
   ruleTile: {fileID: 0}
+  isBuilding: 1
   isRuleTile: 0
   buildingName: House
   num: 0

@@ -15,22 +15,24 @@ MonoBehaviour:
   mainTile: {fileID: 11400000, guid: d98642be993fc2646a23bd7b74ef35d6, type: 2}
   redTile: {fileID: 11400000, guid: 6c88129716ece0d45adcc1395ceec217, type: 2}
   ruleTile: {fileID: 0}
+  isSpecial: 1
+  isBuilding: 0
   isRuleTile: 0
-  buildingName: Well
+  buildingName: Axe
   num: 0
   accessible: 1
   deselectOnBuild: 1
   isMine: 0
   isProducer: 0
   isConsumer: 0
-  validOnGrass: 1
+  validOnGrass: 0
   validOnWater: 0
-  validOnTrees: 0
+  validOnTrees: 1
   validOnRocks: 0
   validOnGoldRocks: 0
   producingList: []
   cosumingList: []
   costList:
-  - 20
   - 0
-  - 5
+  - 0
+  - 0

@@ -15,6 +15,7 @@ MonoBehaviour:
   mainTile: {fileID: 11400000, guid: d98642be993fc2646a23bd7b74ef35d6, type: 2}
   redTile: {fileID: 11400000, guid: 6c88129716ece0d45adcc1395ceec217, type: 2}
   ruleTile: {fileID: 0}
+  isBuilding: 1
   isRuleTile: 0
   buildingName: Well
   num: 0

@@ -14,10 +14,13 @@ public class MouseChecks : MonoBehaviour
     private Vector3Int currentTile;
     private Building currentBuilding;
     private Resource resourceScript;
+    private Axe axeScript;
     void Start()
     {
         tileScript = gameObject.GetComponent<PlaceTiles>();
         resourceScript = gameObject.GetComponent<Resource>();
+
+        axeScript = gameObject.GetComponent<Axe>();
     }
     void Update()
     {
@@ -55,6 +58,14 @@ public class MouseChecks : MonoBehaviour
         if(tileScript.checkValid(currentTile, currentBuilding) == false) { return; }
         if(Input.mousePosition.y <  panBorder) { return; }
         if(checkAffordable(currentBuilding) == false) { return; }
+        if(currentBuilding.isSpecial == true)
+        {
+            if (currentBuilding.name == "6Axe")
+            {
+                axeScript.removeTree(currentTile);
+            }
+        }
+        if(currentBuilding.isBuilding == false) { return; }
         //If no building is selected, the building is not in a valid location, player cannot afford the building,
         //or the mouse is within range of the pan border, then do not run the code below.
         if (currentBuilding.isRuleTile)

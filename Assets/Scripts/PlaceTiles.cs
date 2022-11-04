@@ -40,9 +40,9 @@ public class PlaceTiles : MonoBehaviour
     [Space(10)]
     public float scale;
 
-    Cell[,] grid0;
-    Cell[,] grid1;
-    DetailCell[,] treeGrid;
+    public Cell[,] grid0;
+    public Cell[,] grid1;
+    public DetailCell[,] treeGrid;
     public DetailCell[,] detailGrid;
     public BuildingCell[,] buildingGrid;
 
@@ -299,6 +299,7 @@ public class PlaceTiles : MonoBehaviour
         if(treeGrid[tile.x,tile.y].isTree == true && building.validOnTrees == false) { return false; }
         if (detailGrid[tile.x, tile.y].isRock == true && building.validOnRocks == false) { return false; }
         if (detailGrid[tile.x, tile.y].isGold == true && building.validOnGoldRocks == false) { return false; }
+
         if (grid0[tile.x, tile.y].isWater == false && checkEmpty(tile) == true && building.validOnGrass == false) { return false; }
         if (grid1[tile.x, tile.y].isWater == false && checkEmpty(tile) == true && building.validOnGrass == false) { return false; }
         return true;

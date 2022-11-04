@@ -9,6 +9,8 @@ public class Building : ScriptableObject
     public Tile mainTile;
     public Tile redTile;
     public RuleTile ruleTile;
+    public bool isSpecial;
+    public bool isBuilding;
     public bool isRuleTile;
     public string buildingName;
     public int num;
