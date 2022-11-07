@@ -1399,7 +1399,7 @@ MonoBehaviour:
   map: {fileID: 909463922}
   buildingMap: {fileID: 1921199439}
   cursorTile: {fileID: 11400000, guid: 4ef75de095a6ecd4faace3863bfe63bb, type: 2}
-  panBorder: 120
+  panBorder: 0
 --- !u!61 &1095736879
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1462,7 +1462,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileScript: {fileID: 0}
   currentTilemap: {fileID: 0}
-  yay: {fileID: 11400000, guid: 5d3739fd52113164391fc73830aa8b37, type: 2}
 --- !u!1 &1279951352
 GameObject:
   m_ObjectHideFlags: 0
