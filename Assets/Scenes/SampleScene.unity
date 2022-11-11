@@ -1462,6 +1462,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileScript: {fileID: 0}
   currentTilemap: {fileID: 0}
+  resourceScript: {fileID: 0}
 --- !u!1 &1279951352
 GameObject:
   m_ObjectHideFlags: 0

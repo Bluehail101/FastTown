@@ -60,7 +60,7 @@ public class MouseChecks : MonoBehaviour
         if(checkAffordable(currentBuilding) == false) { return; }
         if(currentBuilding.isSpecial == true)
         {
-            if (currentBuilding.name == "6Axe")
+            if (currentBuilding.name == "0Axe")
             {
                 axeScript.removeTree(currentTile);
             }

@@ -10,31 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d12ce20e9ef9884448131decc164a6f0, type: 3}
-  m_Name: 0House
+  m_Name: 4Road
   m_EditorClassIdentifier: 
-  mainTile: {fileID: 11400000, guid: 19feea459fd69ae49b10ea5548f1abbd, type: 2}
-  redTile: {fileID: 11400000, guid: 5b1cd26333494c944b40569a1628d13e, type: 2}
-  ruleTile: {fileID: 0}
+  mainTile: {fileID: 11400000, guid: d43635938a99cfe488035a25d702063e, type: 2}
+  redTile: {fileID: 11400000, guid: d73f919fd8e732f458d08f4eed7efb0e, type: 2}
+  ruleTile: {fileID: 11400000, guid: 09fd7b05699b8b64ea9abfe98ec6649e, type: 2}
   isBuilding: 1
-  isRuleTile: 0
-  buildingName: House
+  isRuleTile: 1
+  buildingName: Road
   num: 0
   accessible: 1
   deselectOnBuild: 0
   isMine: 0
   isProducer: 0
-  isConsumer: 1
+  isConsumer: 0
   validOnGrass: 1
   validOnWater: 0
   validOnTrees: 0
   validOnRocks: 0
   validOnGoldRocks: 0
   producingList: []
-  cosumingList:
-  - 0
-  - 0.3
-  - 0
+  cosumingList: []
   costList:
-  - 10
   - 0
-  - 20
+  - 0
+  - 1

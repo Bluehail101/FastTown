@@ -11,10 +11,17 @@ public class Axe : MonoBehaviour
     void Start()
     {
         tileScript = gameObject.GetComponent<PlaceTiles>();
+        resourceScript = gameObject.GetComponent<Resource>();
+    }
+
+    public void doMethod()
+    {
+        Debug.Log("Pog");
     }
     public void removeTree(Vector3Int tile)
     {
         tileScript.treeGrid[tile.x,tile.y].isTree = false;
+        resourceScript.wood = resourceScript.wood + 10;
         //Set the tree grid tile to not be a tree anymore.
         if (tileScript.grid1[tile.x,tile.y].isWater == true) { currentTilemap = tileScript.trees; }
         else { currentTilemap = tileScript.upperTrees; }
@@ -38,7 +45,7 @@ public class Axe : MonoBehaviour
         if (tileScript.treeGrid[tile.x, tile.y - 1].isTree == true)
         {
             currentTilemap.SetTile(new Vector3Int(tile.x, tile.y, 1), tileScript.forestTiles[1]);
-            //If the tile
+            //If the tile below is a tree, switch the current tile with a top tree tile.
         }
     }
 }
