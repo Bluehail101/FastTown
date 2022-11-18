@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class Resource : MonoBehaviour
@@ -51,9 +52,9 @@ public class Resource : MonoBehaviour
 
     public void updateResources()
     {
-        goldText.text = "Gold: " + MathF.Truncate(gold).ToString();
-        foodText.text = "Food: " + MathF.Truncate(food).ToString();
-        woodText.text = "Wood: " + MathF.Truncate(wood).ToString();
+        goldText.text = "Gold: " + MathF.Truncate(gold).ToString() + " / " + maxGold;
+        foodText.text = "Food: " + MathF.Truncate(food).ToString() + " / " + maxFood;
+        woodText.text = "Wood: " + MathF.Truncate(wood).ToString() + " / " + maxWood;
     }
 
     
@@ -82,7 +83,7 @@ public class Resource : MonoBehaviour
             currentFailTime += 1;
             if (currentFailTime >= maxFailTime)
             {
-                //Failure
+                SceneManager.LoadScene(1);
             }
             yield return new WaitForSeconds(1f);
         }
