@@ -11,9 +11,18 @@ public class Resource : MonoBehaviour
     public float food;
     public float wood;
 
+    public float maxGold;
+    public float maxFood;
+    public float maxWood;
+
     public TextMeshProUGUI goldText;
     public TextMeshProUGUI foodText;
     public TextMeshProUGUI woodText;
+
+    public int maxFailTime;
+    private int currentFailTime;
+    public bool failClockRunning;
+
 
     public List<float> rateList = new List<float>();
 
@@ -31,6 +40,12 @@ public class Resource : MonoBehaviour
             wood += rateList[2];
             updateResources();
             yield return new WaitForSeconds(0.5f);
+            
+            if(checkAllValid() == false)
+            {
+                if (failClockRunning == false) { currentFailTime = 0; StartCoroutine(failClock()); }
+            }
+
         }
     }
 
@@ -39,5 +54,37 @@ public class Resource : MonoBehaviour
         goldText.text = "Gold: " + MathF.Truncate(gold).ToString();
         foodText.text = "Food: " + MathF.Truncate(food).ToString();
         woodText.text = "Wood: " + MathF.Truncate(wood).ToString();
+    }
+
+    
+    public bool checkAllValid()
+    {
+        if(checkValid(gold, maxGold) == false) { return false; }
+        if(checkValid(food, maxFood) == false) { return false; }
+        if(checkValid(wood, maxWood) == false) { return false; }
+        return true;
+    }
+    public bool checkValid(float value, float maxValue)
+    {
+        if(value < 0 || value > maxValue)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public IEnumerator failClock()
+    {
+        while (true)
+        {
+            failClockRunning = true;
+            if (checkAllValid() == true) { failClockRunning = false; StopCoroutine(failClock()); }
+            currentFailTime += 1;
+            if (currentFailTime >= maxFailTime)
+            {
+                //Failure
+            }
+            yield return new WaitForSeconds(1f);
+        }
     }
 }

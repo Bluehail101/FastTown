@@ -1438,12 +1438,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04432b5f12e259a4da4a1667b7b816ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gold: 200
+  gold: 100
   food: 0
   wood: 100
+  maxGold: 200
+  maxFood: 200
+  maxWood: 200
   goldText: {fileID: 1363635068}
   foodText: {fileID: 1950702935}
   woodText: {fileID: 1966832659}
+  maxFailTime: 5
+  failClockRunning: 0
   rateList:
   - 0
   - 0
